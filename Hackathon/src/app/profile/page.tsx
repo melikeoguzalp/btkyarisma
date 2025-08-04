@@ -1,7 +1,6 @@
-
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge as UiBadge } from '@/components/ui/badge';
@@ -10,7 +9,6 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { cn } from '@/lib/utils';
 import { Loader2, ShieldCheck, Gamepad2, GraduationCap } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
-
 
 type UserProfileData = {
   uid: string;
@@ -30,7 +28,7 @@ export default function ProfilePage() {
   const [user, setUser] = useState<UserProfileData | null>(null);
   const [stats, setStats] = useState<UserStats | null>(null);
   const [earnedBadges, setEarnedBadges] = useState<Badge[]>([]);
-  const [language, setLanguage] = useState('tr');
+  const [language, setLanguage] = useState<'en' | 'tr'>('tr');
   const pathname = usePathname();
   const router = useRouter();
 
@@ -47,48 +45,73 @@ export default function ProfilePage() {
 
   useEffect(() => {
     const fetchUserData = () => {
-        const storedUser = localStorage.getItem('user');
-        const storedLang = (localStorage.getItem('language') || 'tr') as 'en' | 'tr';
-        setLanguage(storedLang);
+      const storedUser = localStorage.getItem('user');
+      const storedLang = (localStorage.getItem('language') || 'tr') as 'en' | 'tr';
+      setLanguage(storedLang);
 
-        if (storedUser) {
-            const parsedUser = JSON.parse(storedUser);
-            setUser(parsedUser);
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
 
-            const storedStats = localStorage.getItem('userStats');
-            if (storedStats) {
-                const userStats = JSON.parse(storedStats) as UserStats;
-                userStats.lessonsCompleted = (userStats.completedStories || []).length;
-                setStats(userStats);
-                updateEarnedBadges(userStats, storedLang);
-            } else {
-                const defaultStats = { reportsAnalyzed: 0, gameScore: 0, lessonsCompleted: 0, completedStories: [] };
-                setStats(defaultStats);
-                updateEarnedBadges(defaultStats, storedLang);
-            }
+        const storedStats = localStorage.getItem('userStats');
+        if (storedStats) {
+          const userStats = JSON.parse(storedStats) as UserStats;
+          userStats.lessonsCompleted = (userStats.completedStories || []).length;
+          setStats(userStats);
+          updateEarnedBadges(userStats, storedLang);
         } else {
-            router.push('/login');
+          const defaultStats = { reportsAnalyzed: 0, gameScore: 0, lessonsCompleted: 0, completedStories: [] };
+          setStats(defaultStats);
+          updateEarnedBadges(defaultStats, storedLang);
         }
+      } else {
+        router.push('/login');
+      }
     };
-    
+
     fetchUserData();
 
     const handleLanguageChange = () => {
       const newLang = (localStorage.getItem('language') || 'tr') as 'en' | 'tr';
       setLanguage(newLang);
-      if(stats){
+      if (stats) {
         updateEarnedBadges(stats, newLang);
       }
     };
 
     window.addEventListener('languageChanged', handleLanguageChange);
-    window.addEventListener('storage', fetchUserData); // Listen for localStorage changes
+    window.addEventListener('storage', fetchUserData);
 
     return () => {
       window.removeEventListener('languageChanged', handleLanguageChange);
       window.removeEventListener('storage', fetchUserData);
     };
-  }, [pathname, router, stats]);
+  }, [pathname, router]); // <-- `stats` çıkarıldı
+
+
+  const earnedBadgeIds = useMemo(() => new Set(earnedBadges.map(b => b.id)), [earnedBadges]);
+  const langBadges = badgesData[language] || badgesData.en;
+
+  const displayStats = [
+    {
+      icon: ShieldCheck,
+      label: language === 'en' ? 'Reports Analyzed' : 'Analiz Edilen Rapor',
+      value: stats?.reportsAnalyzed ?? 0,
+      color: 'text-green-500'
+    },
+    {
+      icon: Gamepad2,
+      label: language === 'en' ? 'Highest Game Score' : 'Yüksek Oyun Puanı',
+      value: stats?.gameScore ?? 0,
+      color: 'text-purple-500'
+    },
+    {
+      icon: GraduationCap,
+      label: language === 'en' ? 'Lessons Completed' : 'Tamamlanan Ders',
+      value: stats?.lessonsCompleted ?? 0,
+      color: 'text-yellow-500'
+    },
+  ];
 
   if (!user || !stats) {
     return (
@@ -97,29 +120,6 @@ export default function ProfilePage() {
       </main>
     );
   }
-  
-  const langBadges = badgesData[language] || badgesData.en;
-  
-  const displayStats = [
-    {
-      icon: ShieldCheck,
-      label: language === 'en' ? 'Reports Analyzed' : 'Analiz Edilen Rapor',
-      value: stats.reportsAnalyzed,
-      color: 'text-green-500'
-    },
-    {
-      icon: Gamepad2,
-      label: language === 'en' ? 'Highest Game Score' : 'Yüksek Oyun Puanı',
-      value: stats.gameScore,
-      color: 'text-purple-500'
-    },
-    {
-      icon: GraduationCap,
-      label: language === 'en' ? 'Lessons Completed' : 'Tamamlanan Ders',
-      value: stats.lessonsCompleted,
-      color: 'text-yellow-500'
-    },
-  ];
 
   return (
     <main className="container mx-auto p-4 md:p-8">
@@ -133,7 +133,6 @@ export default function ProfilePage() {
       </header>
 
       <div className="grid gap-8 md:grid-cols-3">
-        {/* User Info & Stats Card */}
         <Card className="md:col-span-1 shadow-lg bg-card/80 backdrop-blur-sm flex flex-col">
           <CardHeader className="items-center text-center pb-4">
             <Avatar className="w-24 h-24 text-3xl mb-4">
@@ -161,19 +160,18 @@ export default function ProfilePage() {
           </CardContent>
         </Card>
 
-        {/* Badges Card */}
         <Card className="md:col-span-2 shadow-lg bg-card/80 backdrop-blur-sm">
           <CardHeader>
             <CardTitle>{language === 'en' ? 'My Badges' : 'Rozetlerim'}</CardTitle>
             <CardDescription>
-                {language === 'en' ? 'Your collection of achievements.' : 'Başarı koleksiyonun.'}
+              {language === 'en' ? 'Your collection of achievements.' : 'Başarı koleksiyonun.'}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <TooltipProvider>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {langBadges.map((badge) => {
-                  const isEarned = earnedBadges.some(b => b.id === badge.id);
+                  const isEarned = earnedBadgeIds.has(badge.id);
                   return (
                     <Tooltip key={badge.id}>
                       <TooltipTrigger asChild>
