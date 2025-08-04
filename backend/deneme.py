@@ -1,7 +1,7 @@
 import google.generativeai as genai
 
 # 1. API Anahtarını tanımla
-genai.configure(api_key="AIzaSyBRyYIyMk51wEsWP32ibKus7eGKGkif5iA")
+genai.configure(api_key="AIzaSyA1Uq5Tqe_qM4fr0Mvux5Fa6WLfqwgLpck")
 
 # 2. Modeli yükle
 model = genai.GenerativeModel("gemini-2.0-flash")

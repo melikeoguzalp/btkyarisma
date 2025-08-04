@@ -5,7 +5,7 @@ import google.generativeai as genai
 import mysql.connector
 
 # Google Gemini ayarları
-genai.configure(api_key="AIzaSyBRyYIyMk51wEsWP32ibKus7eGKGkif5iA")
+genai.configure(api_key="AIzaSyCcm0bzPfLtSvO1Al18HGaNElBU0oiFeww")
 model = genai.GenerativeModel("gemini-2.0-flash")
 
 app = Flask(__name__)

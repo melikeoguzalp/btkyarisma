@@ -2,6 +2,16 @@
 'use server';
 /**
  * @fileOverview An AI agent that analyzes user-submitted email or SMS content to determine if it is a phishing attempt.
+ *    If possible, infer whether the content is an email or SMS from its structure (e.g., presence of subject lines, email headers, links, etc.) and tailor your analysis accordingly.
+ *    This agent calculates a phishing risk score based on predefined rules and provides actionable advice on reporting the phishing attempt.
+ *    It uses the Genkit AI framework to define the input and output schemas, as well as the prompt for the AI model.
+ *    The agent is designed to be flexible and can handle both English and Turkish languages.
+ *    It is intended for use in applications that require phishing detection and reporting guidance.
+ *    The agent includes:
+ *    - Input validation using Zod schemas to ensure the content and language are correctly formatted.
+ *    - A prompt that guides the AI model to analyze the content based on specific risk factors.
+ *    - An output schema that provides a structured response with a phishing score, reasoning, and reporting advice.
+ *     
  *
  * - analyzePhishingReport - A function that takes email or SMS content as input and returns a phishing analysis.
  * - AnalyzePhishingReportInput - The input type for the analyzePhishingReport function.

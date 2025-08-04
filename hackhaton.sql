@@ -33,14 +33,14 @@ CREATE TABLE `users` (
   `yas` int(11) NOT NULL,
   `okul` varchar(255) NOT NULL,
   `bolum` varchar(255) NOT NULL,
-  `scor` int(11) NOT NULL
+  `score` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Tablo döküm verisi `users`
 --
 
-INSERT INTO `users` (`id`, `isim`, `yas`, `okul`, `bolum`, `scor`) VALUES
+INSERT INTO `users` (`id`, `isim`, `yas`, `okul`, `bolum`, `score`) VALUES
 (1, 'melike oguzalp', 21, 'dpu', 'pc mühendisliği', 25),
 (2, 'Ahmet Yılmaz', 22, 'İTÜ', 'Bilgisayar Mühendisliği', 90),
 (3, 'Melike', 21, 'Dumlupınar üniversitesi', 'bilgisayar mühendisliği', 20);
