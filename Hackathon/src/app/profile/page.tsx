@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge as UiBadge } from '@/components/ui/badge';
@@ -34,7 +34,7 @@ export default function ProfilePage() {
 
   const updateEarnedBadges = (userStats: UserStats, lang: 'en' | 'tr') => {
     const allBadges = badgesData[lang] || badgesData.en;
-    const currentEarnedBadges = allBadges.filter(badge => {
+    const currentEarnedBadges = allBadges.filter((badge) => {
       if (badge.id === 'rookie-analyst') {
         return userStats.reportsAnalyzed >= badge.score;
       }
@@ -60,7 +60,12 @@ export default function ProfilePage() {
           setStats(userStats);
           updateEarnedBadges(userStats, storedLang);
         } else {
-          const defaultStats = { reportsAnalyzed: 0, gameScore: 0, lessonsCompleted: 0, completedStories: [] };
+          const defaultStats: UserStats = {
+            reportsAnalyzed: 0,
+            gameScore: 0,
+            lessonsCompleted: 0,
+            completedStories: [],
+          };
           setStats(defaultStats);
           updateEarnedBadges(defaultStats, storedLang);
         }
@@ -86,32 +91,7 @@ export default function ProfilePage() {
       window.removeEventListener('languageChanged', handleLanguageChange);
       window.removeEventListener('storage', fetchUserData);
     };
-  }, [pathname, router]); // <-- `stats` çıkarıldı
-
-
-  const earnedBadgeIds = useMemo(() => new Set(earnedBadges.map(b => b.id)), [earnedBadges]);
-  const langBadges = badgesData[language] || badgesData.en;
-
-  const displayStats = [
-    {
-      icon: ShieldCheck,
-      label: language === 'en' ? 'Reports Analyzed' : 'Analiz Edilen Rapor',
-      value: stats?.reportsAnalyzed ?? 0,
-      color: 'text-green-500'
-    },
-    {
-      icon: Gamepad2,
-      label: language === 'en' ? 'Highest Game Score' : 'Yüksek Oyun Puanı',
-      value: stats?.gameScore ?? 0,
-      color: 'text-purple-500'
-    },
-    {
-      icon: GraduationCap,
-      label: language === 'en' ? 'Lessons Completed' : 'Tamamlanan Ders',
-      value: stats?.lessonsCompleted ?? 0,
-      color: 'text-yellow-500'
-    },
-  ];
+  }, [pathname, router]); // <-- Sadece gerekli bağımlılıklar
 
   if (!user || !stats) {
     return (
@@ -121,6 +101,29 @@ export default function ProfilePage() {
     );
   }
 
+  const langBadges = badgesData[language] || badgesData.en;
+
+  const displayStats = [
+    {
+      icon: ShieldCheck,
+      label: language === 'en' ? 'Reports Analyzed' : 'Analiz Edilen Rapor',
+      value: stats.reportsAnalyzed,
+      color: 'text-green-500',
+    },
+    {
+      icon: Gamepad2,
+      label: language === 'en' ? 'Highest Game Score' : 'Yüksek Oyun Puanı',
+      value: stats.gameScore,
+      color: 'text-purple-500',
+    },
+    {
+      icon: GraduationCap,
+      label: language === 'en' ? 'Lessons Completed' : 'Tamamlanan Ders',
+      value: stats.lessonsCompleted,
+      color: 'text-yellow-500',
+    },
+  ];
+
   return (
     <main className="container mx-auto p-4 md:p-8">
       <header className="mb-8">
@@ -128,11 +131,14 @@ export default function ProfilePage() {
           {language === 'en' ? 'My Profile' : 'Profilim'}
         </h1>
         <p className="text-muted-foreground mt-2">
-          {language === 'en' ? 'View your stats, information, and earned badges.' : 'İstatistiklerini, bilgilerini ve kazandığın rozetleri görüntüle.'}
+          {language === 'en'
+            ? 'View your stats, information, and earned badges.'
+            : 'İstatistiklerini, bilgilerini ve kazandığın rozetleri görüntüle.'}
         </p>
       </header>
 
       <div className="grid gap-8 md:grid-cols-3">
+        {/* User Info & Stats Card */}
         <Card className="md:col-span-1 shadow-lg bg-card/80 backdrop-blur-sm flex flex-col">
           <CardHeader className="items-center text-center pb-4">
             <Avatar className="w-24 h-24 text-3xl mb-4">
@@ -145,11 +151,13 @@ export default function ProfilePage() {
             </UiBadge>
           </CardHeader>
           <CardContent className="flex-grow flex flex-col justify-end">
-            <h3 className="text-lg font-semibold text-center mb-4">{language === 'en' ? 'My Stats' : 'İstatistiklerim'}</h3>
+            <h3 className="text-lg font-semibold text-center mb-4">
+              {language === 'en' ? 'My Stats' : 'İstatistiklerim'}
+            </h3>
             <div className="space-y-4">
               {displayStats.map((stat, index) => (
                 <div key={index} className="flex items-center gap-4 p-3 bg-background/50 rounded-lg">
-                  <stat.icon className={cn("h-8 w-8", stat.color)} />
+                  <stat.icon className={cn('h-8 w-8', stat.color)} />
                   <div>
                     <p className="font-bold text-xl">{stat.value}</p>
                     <p className="text-sm text-muted-foreground">{stat.label}</p>
@@ -160,6 +168,7 @@ export default function ProfilePage() {
           </CardContent>
         </Card>
 
+        {/* Badges Card */}
         <Card className="md:col-span-2 shadow-lg bg-card/80 backdrop-blur-sm">
           <CardHeader>
             <CardTitle>{language === 'en' ? 'My Badges' : 'Rozetlerim'}</CardTitle>
@@ -171,7 +180,7 @@ export default function ProfilePage() {
             <TooltipProvider>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {langBadges.map((badge) => {
-                  const isEarned = earnedBadgeIds.has(badge.id);
+                  const isEarned = earnedBadges.some((b) => b.id === badge.id);
                   return (
                     <Tooltip key={badge.id}>
                       <TooltipTrigger asChild>
