@@ -1,5 +1,11 @@
-
-import { LucideIcon, FileCode, Link2, ShieldQuestion, Drama, Lightbulb, Smartphone, Phone, UserCheck, Fish, ServerCrash, KeyRound, Code, ShieldOff, BetweenHorizonalEnd, DatabaseZap, BookOpen, ListTree, Gamepad2, ShieldAlert, BrainCircuit, FileWarning, ShieldCheck, ArrowUpCircle, WifiOff, CopyX, SmartphoneNfc, DownloadCloud, Usb, Users, CalendarClock, Laptop, Lock, MailCheck, Shield, Wifi, FileLock, Webcam, Filter, CloudCog, Rss, Info, Fingerprint, LockKeyhole, SearchCheck } from "lucide-react";
+import { 
+    LucideIcon, FileCode, Link2, ShieldQuestion, Drama, Lightbulb, Smartphone, Phone, UserCheck, 
+    Fish, ServerCrash, KeyRound, Code, ShieldOff, BetweenHorizonalEnd, DatabaseZap, BookOpen, 
+    ListTree, Gamepad2, ShieldAlert, BrainCircuit, FileWarning, ShieldCheck, ArrowUpCircle, 
+    WifiOff, CopyX, SmartphoneNfc, DownloadCloud, Usb, Users, CalendarClock, Laptop, Lock, 
+    MailCheck, Shield, Wifi, FileLock, Webcam, Filter, CloudCog, Rss, Info, Fingerprint, 
+    LockKeyhole, SearchCheck, Clapperboard 
+} from "lucide-react";
 
 export type InfoCard = {
     title: string;
@@ -17,13 +23,13 @@ export type InteractiveStory = {
 };
 
 export type GameScenario = {
-  id: number;
-  type: 'email' | 'sms';
-  sender: string;
-  subject?: string;
-  content: string;
-  isPhishing: boolean;
-  explanation: string;
+    id: number;
+    type: 'email' | 'sms';
+    sender: string;
+    subject?: string;
+    content: string;
+    isPhishing: boolean;
+    explanation: string;
 };
 
 export type DailyTip = {
@@ -101,6 +107,7 @@ export const educationData: { [key: string]: { infoCards: InfoCard[], stories: I
             { title: "Update Recovery Information", content: "Frequently update your password recovery information.", icon: Info },
             { title: "Remove Unknown Apps", content: "Uninstall unknown applications from your computer or phone.", icon: Smartphone },
         ],
+
         stories: [
             { id: "story_1", scenario: "You received an email from 'e-devlet-destek@edevlet-gov-tr.org' with the subject 'Update your e-Devlet password immediately!'. The content says you must update your password within 24 hours or your account will be suspended.", dangerType: "Phishing via Fake Domain", icon: Link2, options: [{ text: "Click the link to update.", isCorrect: false },{ text: "Delete the email and log in via the official site.", isCorrect: true }], explanation: "The official e-Devlet domain is turkiye.gov.tr. The sender's domain is fake and designed to steal your credentials." },
             { id: "story_2", scenario: "An email from 'guvenlik@ziraat-guvenlik.com' states that your bank account is suspended due to unusual login attempts and asks you to click a link to verify.", dangerType: "Phishing via Impersonation", icon: Link2, options: [{ text: "Click the link and enter my details.", isCorrect: false },{ text: "Contact the bank through its official app or number.", isCorrect: true }], explanation: "The domain is fake. Ziraat Bank's official domain is ziraatbank.com.tr. This link leads to a fake site to steal your information." },
@@ -113,6 +120,7 @@ export const educationData: { [key: string]: { infoCards: InfoCard[], stories: I
             { id: "story_9", scenario: "You find a file named 'sgk_hizmet_dokumu2025.docm' in your downloads, appearing to be a social security statement.", dangerType: "Malware (Malicious Macro)", icon: FileCode, options: [{ text: "Open it and enable macros if prompted.", isCorrect: false },{ text: "Delete the file as .docm can contain harmful macros.", isCorrect: true }], explanation: "'.docm' files can contain macros, which are scripts that can automatically run and install malware on your computer." },
             { id: "story_10", scenario: "An attachment named 'mehmet_resim.jpg.exe' is in an email from an unknown sender.", dangerType: "Malware (Disguised Executable)", icon: FileCode, options: [{ text: "Open the file to see the picture of Mehmet.", isCorrect: false },{ text: "Delete the email, it's a virus.", isCorrect: true }], explanation: "This is another double extension trick. It looks like a JPG image, but it's an executable (.exe) file that will run a virus." },
         ],
+
         dailyTips: [
              { id: "tip1", title: "How to Report SMS Spam", content: "You can report spam SMS messages to the authorities by forwarding the message to a specific number. In Turkey, you can use the 'e-Devlet' or 'IYS' services.", icon: Lightbulb },
             { id: "tip2", title: "Use Unique Passwords", content: "Avoid using the same password for multiple websites. If one site is breached, all your accounts become vulnerable. Use a password manager to help.", icon: Lightbulb },
@@ -130,13 +138,16 @@ export const educationData: { [key: string]: { infoCards: InfoCard[], stories: I
             { title: "SQL Injection", description: "A SQL injection attack consists of insertion of a SQL query via the input data from the client to the application. A successful SQL injection exploit can read sensitive data from the database.", icon: DatabaseZap },
             { title: "Credential Stuffing", description: "This is a type of cyberattack where stolen account credentials (usernames and passwords) are used to gain unauthorized access to user accounts through large-scale automated login requests.", icon: KeyRound },
         ],
+
         educationSections: [
-             { title: 'Interactive Stories', description: 'Learn from real-life scenarios.', link: '/education/stories', icon: BookOpen },
+            { title: 'Interactive Stories', description: 'Learn from real-life scenarios.', link: '/education/stories', icon: BookOpen },
             { title: 'Quick Info', description: 'Get security tips in seconds.', link: '/education/info', icon: ListTree },
             { title: 'Phishing Game', description: 'Test your skills against AI-generated scenarios.', link: '/education/game', icon: Gamepad2 },
             { title: 'Attack Types', description: 'Understand common phishing methods.', link: '/education/types', icon: ShieldAlert },
             { title: 'Getting Manipulated', description: 'Learn to recognize psychological tactics.', link: '/education/manipulation', icon: BrainCircuit },
             { title: 'Be Careful', description: 'Learn how to check links and files.', link: '/education/attention', icon: SearchCheck },
+            // YENİ EKLENEN BÖLÜM
+            { title: 'Training Videos', description: 'Watch videos to learn about cybersecurity.', link: '/education/EducationVideos', icon: Clapperboard },
         ]
     },
     tr: {
@@ -192,6 +203,7 @@ export const educationData: { [key: string]: { infoCards: InfoCard[], stories: I
             { title: "Kurtarma Bilgilerinizi Güncelleyin", content: "Sık sık parola kurtarma bilgilerinizi güncelleyin.", icon: Info },
             { title: "Bilinmeyen Uygulamaları Kaldırın", content: "Bilgisayarınızda veya telefonda bilinmeyen uygulamaları kaldırın.", icon: Smartphone },
         ],
+
         stories: [
             { id: "story_1", scenario: "Kimden: 'e-devlet-destek@edevlet-gov-tr.org', Konu: 'e-Devlet şifrenizi hemen güncelleyin!'. İçerik: 'Hesabınızın güvenliği için 24 saat içinde şifrenizi güncellemeniz gerekmektedir. Aksi takdirde hesabınız askıya alınacaktır.'", dangerType: "Sahte Alan Adı ile Oltalama", icon: Link2, options: [{ text: "Linki tıklayıp güncellerim.", isCorrect: false },{ text: "E-postayı siler, resmi siteden giriş yaparım.", isCorrect: true }], explanation: "Resmi e-Devlet alan adı turkiye.gov.tr'dir. Gönderen adresi sahtedir ve kimlik bilgilerinizi çalmak için tasarlanmıştır." },
             { id: "story_2", scenario: "'guvenlik@ziraat-guvenlik.com' adresinden gelen bir e-posta, olağandışı giriş denemeleri nedeniyle banka hesabınızın askıya alındığını belirtiyor ve doğrulama için bir bağlantıya tıklamanızı istiyor.", dangerType: "Taklitçilik Yoluyla Oltalama", icon: Link2, options: [{ text: "Linke tıklar ve bilgilerimi girerim.", isCorrect: false },{ text: "Resmi uygulama veya telefon numarasından bankayla iletişime geçerim.", isCorrect: true }], explanation: "Alan adı sahte. Ziraat Bankası'nın resmi alan adı ziraatbank.com.tr'dir. Bu link, bilgilerinizi çalmak için sahte bir siteye yönlendirir." },
@@ -204,12 +216,13 @@ export const educationData: { [key: string]: { infoCards: InfoCard[], stories: I
             { id: "story_9", scenario: "İndirilenler klasörünüzde, bir sosyal güvenlik dökümü gibi görünen 'sgk_hizmet_dokumu2025.docm' adlı bir dosya buldunuz.", dangerType: "Kötü Amaçlı Yazılım (Zararlı Makro)", icon: FileCode, options: [{ text: "Açarım ve istenirse makroları etkinleştiririm.", isCorrect: false },{ text: ".docm zararlı makrolar içerebileceği için dosyayı silerim.", isCorrect: true }], explanation: "'.docm' dosyaları, otomatik olarak çalışıp bilgisayarınıza kötü amaçlı yazılım yükleyebilen komut dosyaları olan makrolar içerebilir." },
             { id: "story_10", scenario: "Bilinmeyen bir göndericiden gelen bir e-postada 'mehmet_resim.jpg.exe' adlı bir ek var.", dangerType: "Kötü Amaçlı Yazılım (Gizlenmiş Çalıştırılabilir Dosya)", icon: FileCode, options: [{ text: "Mehmet'in resmini görmek için dosyayı açarım.", isCorrect: false },{ text: "E-postayı silerim, bu bir virüs.", isCorrect: true }], explanation: "Bu başka bir çift uzantı hilesidir. Bir JPG resmi gibi görünür, ancak bir virüs çalıştıracak olan çalıştırılabilir bir (.exe) dosyasıdır." },
         ],
-        dailyTips: [
+
+       dailyTips: [
             { id: "tip1", title: "SMS Spam Nasıl Şikayet Edilir?", content: "İstenmeyen SMS'leri yetkililere bildirebilirsiniz. Türkiye'de, İstenmeyen SMS Şikayet Sistemi'ne e-Devlet üzerinden veya Ticari Elektronik İleti Yönetim Sistemi (İYS) üzerinden şikayette bulunabilirsiniz.", icon: Lightbulb },
             { id: "tip2", title: "Her Yerde Farklı Şifre Kullanın", content: "Birden fazla web sitesi için aynı şifreyi kullanmaktan kaçının. Bir site saldırıya uğrarsa, tüm hesaplarınız savunmasız kalır. Parola yöneticisi kullanın.", icon: Lightbulb },
             { id: "tip3", title: "İki Faktörlü Kimlik Doğrulamayı (2FA) Etkinleştirin", content: "2FA, ekstra bir güvenlik katmanı ekler. Birisi şifrenizi çalsa bile, telefonunuz olmadan giriş yapamazlar.", icon: Lightbulb }
         ],
-        phishingTypes: [
+         phishingTypes: [
             { title: "Oltalama (Phishing)", description: "Oltalama, elektronik bir iletişimde güvenilir bir kurum gibi davranarak kullanıcı adları, şifreler ve kredi kartı bilgileri gibi hassas bilgileri elde etmeye yönelik sahtekarlık girişimidir.", icon: Fish },
             { title: "Hedefli Oltalama (Spear Phishing)", description: "Bu, saldırganların kurbanlarını araştırdığı ve kişiselleştirilmiş e-postalar hazırladığı, son derece hedefli bir oltalama türüdür. Mesaj, güvenilir bir kaynaktan geliyormuş gibi görünür, bu da onu daha inandırıcı ve tespit edilmesi daha zor hale getirir.", icon: UserCheck },
             { title: "Smishing (SMS Oltalama)", description: "Smishing, kullanıcıları sahte linklere tıklamaya, kötü amaçlı yazılım indirmeye veya hassas bilgileri ifşa etmeye yönlendirmek için kötü niyetli metin mesajları kullanır. Bu mesajlar genellikle sahte bir paket teslimat bildirimi gibi bir aciliyet duygusu yaratır.", icon: Smartphone },
@@ -221,15 +234,16 @@ export const educationData: { [key: string]: { infoCards: InfoCard[], stories: I
             { title: "SQL Enjeksiyonu", description: "Bir SQL enjeksiyonu saldırısı, istemciden uygulamaya gelen girdi verileri aracılığıyla bir SQL sorgusunun eklenmesinden oluşur. Başarılı bir SQL enjeksiyonu, veritabanından hassas verileri okuyabilir.", icon: DatabaseZap },
             { title: "Kimlik Bilgisi Doldurma (Credential Stuffing)", description: "Bu, çalınan hesap kimlik bilgilerinin (kullanıcı adları ve şifreler), büyük ölçekli otomatik oturum açma istekleri yoluyla kullanıcı hesaplarına yetkisiz erişim sağlamak için kullanıldığı bir siber saldırı türüdür.", icon: KeyRound },
         ],
-        educationSections: [
-             { title: 'Etkileşimli Hikayeler', description: 'Gerçek hayat senaryolarından öğrenin.', link: '/education/stories', icon: BookOpen },
-            { title: 'Hızlı Bilgi', description: 'Saniyeler içinde güvenlik ipuçları alın.', link: '/education/info', icon: ListTree },
-            { title: 'Phishing Oyunu', description: 'Yeteneklerinizi yapay zekaya karşı test edin.', link: '/education/game', icon: Gamepad2 },
-            { title: 'Saldırı Türleri', description: 'Yaygın oltalama yöntemlerini anlayın.', link: '/education/types', icon: ShieldAlert },
-            { title: 'Manipüle Olma', description: 'Psikolojik taktikleri tanımayı öğrenin.', link: '/education/manipulation', icon: BrainCircuit },
-            { title: 'Dikkat Et', description: 'Linkleri ve dosyaları kontrol etmeyi öğrenin.', link: '/education/attention', icon: SearchCheck },
-        ]
-    },
-};
 
-    
+        educationSections: [
+            { title: 'Etkileşimli Hikayeler', description: 'Gerçek hayat senaryolarından ders alın.', link: '/education/stories', icon: BookOpen },
+            { title: 'Hızlı Bilgi', description: 'Saniyeler içinde güvenlik ipuçları alın.', link: '/education/info', icon: ListTree },
+            { title: 'Phishing Oyunu', description: 'Yapay zeka senaryolarına karşı yeteneklerinizi test edin.', link: '/education/game', icon: Gamepad2 },
+            { title: 'Saldırı Türleri', description: 'Yaygın oltalama yöntemlerini anlayın.', link: '/education/types', icon: ShieldAlert },
+            { title: 'Maniple Olma', description: 'Psikolojik taktikleri tanımayı öğrenin.', link: '/education/manipulation', icon: BrainCircuit },
+            { title: 'Dikkat Et', description: 'Bağlantıları ve dosyaları nasıl kontrol edeceğinizi öğrenin.', link: '/education/attention', icon: SearchCheck },
+            // YENİ EKLENEN BÖLÜM
+            { title: 'Eğitim Videoları', description: 'Siber güvenlik hakkında videoları izleyin.', link: '/education/EducationVideos', icon: Clapperboard },
+        ]
+    }
+};

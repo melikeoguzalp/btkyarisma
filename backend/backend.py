@@ -6,7 +6,7 @@ import mysql.connector
 
 # Google Gemini ayarları
 genai.configure(api_key="AIzaSyCcm0bzPfLtSvO1Al18HGaNElBU0oiFeww")
-model = genai.GenerativeModel("gemini-2.0-flash")
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 app = Flask(__name__)
 CORS(app)
