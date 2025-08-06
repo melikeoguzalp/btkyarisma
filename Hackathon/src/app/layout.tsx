@@ -15,11 +15,6 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { cn } from '@/lib/utils';
 import { educationData } from '@/lib/education-data';
 
-// Note: Metadata is not supported in client components.
-// export const metadata: Metadata = {
-//   title: 'PhishGuard',
-//   description: 'AI-powered phishing detection and prevention.',
-// };
 
 export default function RootLayout({
   children,

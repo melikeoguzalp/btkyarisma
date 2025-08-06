@@ -146,8 +146,6 @@ export const educationData: { [key: string]: { infoCards: InfoCard[], stories: I
             { title: 'Attack Types', description: 'Understand common phishing methods.', link: '/education/types', icon: ShieldAlert },
             { title: 'Getting Manipulated', description: 'Learn to recognize psychological tactics.', link: '/education/manipulation', icon: BrainCircuit },
             { title: 'Be Careful', description: 'Learn how to check links and files.', link: '/education/attention', icon: SearchCheck },
-            // YENİ EKLENEN BÖLÜM
-            { title: 'Training Videos', description: 'Watch videos to learn about cybersecurity.', link: '/education/EducationVideos', icon: Clapperboard },
         ]
     },
     tr: {
@@ -241,9 +239,7 @@ export const educationData: { [key: string]: { infoCards: InfoCard[], stories: I
             { title: 'Phishing Oyunu', description: 'Yapay zeka senaryolarına karşı yeteneklerinizi test edin.', link: '/education/game', icon: Gamepad2 },
             { title: 'Saldırı Türleri', description: 'Yaygın oltalama yöntemlerini anlayın.', link: '/education/types', icon: ShieldAlert },
             { title: 'Maniple Olma', description: 'Psikolojik taktikleri tanımayı öğrenin.', link: '/education/manipulation', icon: BrainCircuit },
-            { title: 'Dikkat Et', description: 'Bağlantıları ve dosyaları nasıl kontrol edeceğinizi öğrenin.', link: '/education/attention', icon: SearchCheck },
-            // YENİ EKLENEN BÖLÜM
-            { title: 'Eğitim Videoları', description: 'Siber güvenlik hakkında videoları izleyin.', link: '/education/EducationVideos', icon: Clapperboard },
+            { title: 'Dikkat Et', description: 'Bağlantıları ve dosyaları nasıl kontrol edeceğinizi öğrenin.', link: '/education/attention', icon: SearchCheck }
         ]
     }
 };

@@ -1,5 +1,5 @@
 
-import { LucideIcon, Shield, ShieldCheck, ShieldHalf, ShieldEllipsis, BookOpen, ScrollText, NotebookText, Bot, Target, Gem, Trophy, Star, Award, ShieldQuestion, BrainCircuit } from 'lucide-react';
+import { LucideIcon, Shield, ShieldCheck, ShieldHalf, ShieldEllipsis, BookOpen, ScrollText, NotebookText, Bot, Target, Gem, Trophy, Star, Award, ShieldQuestion, BrainCircuit, SearchCheck, MessageSquareWarning, Newspaper, UserX, GraduationCap, Info } from 'lucide-react';
 
 export type Badge = {
   id: string;
@@ -8,7 +8,7 @@ export type Badge = {
   icon: LucideIcon;
   color: string;
   score: number;
-  type: 'game' | 'report' | 'story';
+  type: 'game' | 'report' | 'story' | 'story_id';
 };
 
 export const badgesData: { [key: string]: Badge[] } = {
@@ -133,14 +133,60 @@ export const badgesData: { [key: string]: Badge[] } = {
       score: 2000,
       type: 'game'
     },
-     {
-      id: 'psychology-expert',
+    // Lesson Completion Badges (story_id type)
+    {
+      id: 'manipulation-lesson-completed',
       name: 'Mind Reader',
       description: 'Completed the "Getting Manipulated" lesson.',
       icon: BrainCircuit,
       color: 'border-teal-500/50 bg-teal-500/10 text-teal-300',
-      score: 11, // Special ID for this lesson, assuming story 11
-      type: 'story'
+      score: 1, 
+      type: 'story_id'
+    },
+    {
+      id: 'attention-lesson-completed',
+      name: 'Detail Detective',
+      description: 'Completed the "Be Careful" lesson about inspecting links.',
+      icon: SearchCheck,
+      color: 'border-blue-500/50 bg-blue-500/10 text-blue-300',
+      score: 1, 
+      type: 'story_id'
+    },
+     {
+      id: 'simulation-lesson-completed',
+      name: 'Complaint Pro',
+      description: 'Completed the "I Have a Complaint" simulation.',
+      icon: MessageSquareWarning,
+      color: 'border-gray-500/50 bg-gray-500/10 text-gray-300',
+      score: 1, 
+      type: 'story_id'
+    },
+    {
+      id: 'news-page-visited',
+      name: 'Informed Citizen',
+      description: 'Visited the Cyber News page to stay up-to-date.',
+      icon: Newspaper,
+      color: 'border-fuchsia-500/50 bg-fuchsia-500/10 text-fuchsia-300',
+      score: 1, 
+      type: 'story_id'
+    },
+    {
+      id: 'cyberbullying-page-visited',
+      name: 'Empathy Champion',
+      description: 'Visited the Cyberbullying awareness page.',
+      icon: UserX,
+      color: 'border-pink-500/50 bg-pink-500/10 text-pink-300',
+      score: 1, 
+      type: 'story_id'
+    },
+    {
+        id: 'education-hub-master',
+        name: 'Education Hub Master',
+        description: 'Completed all available educational sections.',
+        icon: GraduationCap,
+        color: 'border-yellow-400/50 bg-yellow-400/20 text-yellow-300',
+        score: 5,
+        type: 'story'
     }
   ],
   tr: [
@@ -264,14 +310,62 @@ export const badgesData: { [key: string]: Badge[] } = {
       score: 2000,
       type: 'game'
     },
+    // Ders Tamamlama Rozetleri (story_id tipi)
     {
-      id: 'psychology-expert',
+      id: 'manipulation-lesson-completed',
       name: 'Zihin Okuyucu',
       description: '"Manipüle Olma" dersini tamamladın.',
       icon: BrainCircuit,
       color: 'border-teal-500/50 bg-teal-500/10 text-teal-300',
-      score: 11, // Bu ders için özel ID, 11. hikaye varsayıldı
-      type: 'story'
+      score: 1, 
+      type: 'story_id'
+    },
+    {
+      id: 'attention-lesson-completed',
+      name: 'Detay Dedektifi',
+      description: '"Dikkat Et" dersini tamamlayarak linkleri incelemeyi öğrendin.',
+      icon: SearchCheck,
+      color: 'border-blue-500/50 bg-blue-500/10 text-blue-300',
+      score: 1, 
+      type: 'story_id'
+    },
+    {
+      id: 'simulation-lesson-completed',
+      name: 'Şikayet Profesyoneli',
+      description: '"Şikayetim Var" simülasyonunu tamamladın.',
+      icon: MessageSquareWarning,
+      color: 'border-gray-500/50 bg-gray-500/10 text-gray-300',
+      score: 1, 
+      type: 'story_id'
+    },
+    {
+      id: 'news-page-visited',
+      name: 'Bilinçli Vatandaş',
+      description: 'Siber Haberler sayfasını ziyaret ederek gündemi takip ettin.',
+      icon: Newspaper,
+      color: 'border-fuchsia-500/50 bg-fuchsia-500/10 text-fuchsia-300',
+      score: 1, 
+      type: 'story_id'
+    },
+    {
+      id: 'cyberbullying-page-visited',
+      name: 'Empati Şampiyonu',
+      description: 'Siber Zorbalık farkındalık sayfasını ziyaret ettin.',
+      icon: UserX,
+      color: 'border-pink-500/50 bg-pink-500/10 text-pink-300',
+      score: 1, 
+      type: 'story_id'
+    },
+     {
+        id: 'education-hub-master',
+        name: 'Eğitim Merkezi Ustası',
+        description: 'Mevcut tüm eğitim bölümlerini tamamladın.',
+        icon: GraduationCap,
+        color: 'border-yellow-400/50 bg-yellow-400/20 text-yellow-300',
+        score: 5, // toplam story sayısı + story_id ile kazanılan dersler
+        type: 'story'
     }
   ],
 };
+
+    
